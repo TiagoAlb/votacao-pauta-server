@@ -14,22 +14,16 @@ import javax.persistence.TemporalType;
 @Entity
 public class Pauta implements Serializable {
    @Id
-   @GeneratedValue(
-      strategy = GenerationType.IDENTITY
-   )
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private long id;
-   @Column(
-      nullable = false,
-      length = 50
-   )
+   
+   @Column(nullable = false, length = 50)
    private String titulo;
-   @Column(
-      length = 50
-   )
+   
+   @Column(length = 50)
    private String descricao;
-   @JsonFormat(
-      pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ"
-   )
+   
+   @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
    @Temporal(TemporalType.TIMESTAMP)
    private Date create_date = new Date(System.currentTimeMillis());
 

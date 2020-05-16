@@ -17,33 +17,27 @@ import javax.persistence.TemporalType;
 @Entity
 public class Votacao implements Serializable {
    @Id
-   @GeneratedValue(
-      strategy = GenerationType.IDENTITY
-   )
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private long id;
+   
    @OneToOne
    private Pauta pauta;
-   @JsonFormat(
-      pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ"
-   )
+   
+   @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
    @Temporal(TemporalType.TIMESTAMP)
    private Date start_date = new Date(System.currentTimeMillis());
-   @JsonFormat(
-      pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ"
-   )
+   
+   @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
    @Temporal(TemporalType.TIMESTAMP)
    private Date end_date;
-   @Column(
-      nullable = false
-   )
+   
+   @Column(nullable = false)
    private boolean open = true;
-   @Column(
-      nullable = false
-   )
-   private long minutes = 1L;
-   @OneToMany(
-      orphanRemoval = true
-   )
+   
+   @Column(nullable = false)
+   private long minutes = 1;
+   
+   @OneToMany(orphanRemoval = true)
    private List<Voto> votos;
 
    public long getId() {

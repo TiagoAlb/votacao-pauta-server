@@ -14,23 +14,16 @@ import javax.persistence.TemporalType;
 @Entity
 public class Associado implements Serializable {
    @Id
-   @GeneratedValue(
-      strategy = GenerationType.IDENTITY
-   )
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private long id;
-   @Column(
-      nullable = false,
-      length = 14
-   )
+   
+   @Column(nullable = false, length = 14)
    private String cnpjCpf;
-   @Column(
-      nullable = false,
-      length = 50
-   )
+   
+   @Column(nullable = false, length = 50)
    private String nome;
-   @JsonFormat(
-      pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ"
-   )
+   
+   @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
    @Temporal(TemporalType.TIMESTAMP)
    private Date create_date = new Date(System.currentTimeMillis());
 

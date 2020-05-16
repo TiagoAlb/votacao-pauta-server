@@ -11,15 +11,13 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Voto implements Serializable {
    @Id
-   @GeneratedValue(
-      strategy = GenerationType.IDENTITY
-   )
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private long id;
+   
    @ManyToOne
    private Associado associado;
-   @Column(
-      nullable = false
-   )
+   
+   @Column(nullable = false)
    private boolean voto = false;
 
    public long getId() {
