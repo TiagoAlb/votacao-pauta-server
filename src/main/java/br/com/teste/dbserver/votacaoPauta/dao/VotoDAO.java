@@ -5,5 +5,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface VotoDAO extends PagingAndSortingRepository<Voto, Integer> {
+public interface VotoDAO extends PagingAndSortingRepository<Voto, Long> {
 }

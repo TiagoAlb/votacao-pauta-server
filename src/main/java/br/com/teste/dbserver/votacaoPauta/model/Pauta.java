@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Pauta implements Serializable {
@@ -17,10 +20,16 @@ public class Pauta implements Serializable {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private long id;
    
+   @NotNull(message = "O campo titulo não pode ser nulo!")
+   @Size(max = 50, message = "O campo titulo deve possuir no máximo {max} digitos!")
+   @NotEmpty(message = "O campo titulo não pode ser vazio!")
    @Column(nullable = false, length = 50)
    private String titulo;
    
-   @Column(length = 50)
+   @NotNull(message = "O campo descricao não pode ser nulo!")
+   @Size(max = 500, message = "O descricao titulo deve possuir no máximo {max} digitos!")
+   @NotEmpty(message = "O campo descricao não pode ser vazio!")
+   @Column(length = 500)
    private String descricao;
    
    @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")

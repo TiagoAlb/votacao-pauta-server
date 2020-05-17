@@ -1,6 +1,7 @@
 package br.com.teste.dbserver.votacaoPauta.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +38,7 @@ public class Votacao implements Serializable {
    @Column(nullable = false)
    private long minutes = 1;
    
+   @JsonIgnore
    @OneToMany(orphanRemoval = true)
    private List<Voto> votos;
 
@@ -84,7 +86,9 @@ public class Votacao implements Serializable {
       return this.minutes;
    }
 
-   public void setMinutes(long minutes) {
+   public void setMinutes(long minutes) throws Exception {
+      if(minutes < 1)
+          throw new Exception("O tempo mínimo para sessão de votação é de 1 minuto!");
       this.minutes = minutes;
    }
 
