@@ -39,7 +39,7 @@ Listar associados disponíveis para votação: `/associados`
 
 Buscar associado específico: `/associados/{id}`
 
-Consultar disponibilidade votação api externa(consulta em `https://user-info.herokuapp.com/users/`): `/associados/consultaCnpjCpf/{cnpjCPf}`
+Consultar disponibilidade votação api externa (consulta em `https://user-info.herokuapp.com/users/`): `/associados/consultaCnpjCpf/{cnpjCPf}`
 
 Listar pautas: `/pautas`
 
@@ -62,15 +62,15 @@ Cadastrar associado: `/associados`
 
 Cadastrar pauta: `/pautas`
 
-Iniciar sessão de votação para uma pauta(O parâmetro minutes é opcional. Neste caso será utilizado 1 como padrão.
+Iniciar sessão de votação para uma pauta (O parâmetro minutes é opcional. Neste caso será utilizado 1 como padrão.
 Caso seja acrescentado 0 uma exceção será lançada): `/pautas/{id}/votacao?minutes={minutos}`
 
-Realizar voto em uma sessão de votação(O parâmetro voto é obrigatório e pode ser colocado com acentuação. Caso não seja preenchido, uma exceção será lançada): `/votacoes/{idVotacao}/associados/{idAssociado}/votos?voto={voto}`
+Realizar voto em uma sessão de votação (O parâmetro voto é obrigatório e pode ser colocado com acentuação. Caso não seja preenchido, uma exceção será lançada): `/votacoes/{idVotacao}/associados/{idAssociado}/votos?voto={voto}`
 
 ## Tratamentos de erros da API
 ### Associado
 - Associado {id} não encontrado!
-- Erro ao incluir assocoado!
+- Erro ao incluir associado!
 ### CNPJ/CPF
 - Este CNPJ ou CPF já está cadastrado!
 - Formato de CNPJ ou CPF inválido!
@@ -119,7 +119,7 @@ Realizar voto em uma sessão de votação(O parâmetro voto é obrigatório e po
 ### VOTO
 - Campo voto inválido!
 
-## Tratamentos de sucesso da API:
+## Tratamentos de sucesso da API
 - Votação ID: {id} iniciada com sucesso! Término em {dataTermino}
 - A pauta ID: {id} foi aprovada! {porcentagem} dos votos favoráveis.
 - A pauta ID: {id} foi reprovada! {porcentagem} dos votos contrários.
@@ -287,7 +287,7 @@ Retorno:
 }
 ```
 
-## Envio por email:
+## Envio por email
 Não se preocupe! Todos os associados serão avisados da finalização da sessão de votação. O email utilizado para envio será o criado no cadastro do associado.
 
 ### Exemplo de retorno por email
