@@ -35,7 +35,7 @@ public class Pautas {
         } catch(Exception e) {
             return new ResponseEntity<>(new ApiError(
                             HttpStatus.INTERNAL_SERVER_ERROR,
-                            "Não foi possível votar!", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+                            "Erro ao incluir pauta!", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(pautaDAO.save(pauta), HttpStatus.CREATED);
     }

@@ -79,8 +79,8 @@ public class Votos {
             votacaoDAO.save(votacao.get());
         } catch(Exception e) {
             return new ResponseEntity<>(new ApiError(
-                            HttpStatus.INTERNAL_SERVER_ERROR,
-                            "Não foi possível votar!", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+                            HttpStatus.FORBIDDEN,
+                            "Não foi possível votar!", e.getMessage()), HttpStatus.FORBIDDEN);
         }
         
         return new ResponseEntity<>(objetoVoto, HttpStatus.CREATED);

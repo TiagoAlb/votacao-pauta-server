@@ -5,6 +5,11 @@ import br.com.teste.dbserver.votacaoPauta.error.ApiError;
 import br.com.teste.dbserver.votacaoPauta.error.ResourceNotFoundException;
 import br.com.teste.dbserver.votacaoPauta.model.Associado;
 import br.com.teste.dbserver.votacaoPauta.util.CpfCnpjUtils;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +47,7 @@ public class Associados {
         } catch(Exception e) {
             return new ResponseEntity<>(new ApiError(
                             HttpStatus.INTERNAL_SERVER_ERROR,
-                            "Não foi possível votar!", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+                            "Erro ao incluir associado!", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(associadoDAO.save(associado), HttpStatus.CREATED);
     }
@@ -62,5 +67,34 @@ public class Associados {
             throw new ResourceNotFoundException("Associado " + id + " não encontrado!");
              
         return associado.get();
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, path = "/associados/consultaCnpjCpf/{cnpjCPf}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Object> GET_CONSULTA_CJPCPF(@PathVariable("cnpjCPf") String cnpjCpf) throws IOException {
+        StringBuffer content = new StringBuffer();
+        
+        URL url = new URL("https://user-info.herokuapp.com/users/" + cnpjCpf);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        con.setRequestMethod("GET");
+        con.setDoOutput(true);
+        con.setConnectTimeout(5000);
+        con.setReadTimeout(5000);
+  
+        try (
+            BufferedReader in = new BufferedReader(
+            new InputStreamReader(con.getInputStream()))) {
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+            con.disconnect();
+        } catch(IOException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(content, HttpStatus.OK);
     }
 }

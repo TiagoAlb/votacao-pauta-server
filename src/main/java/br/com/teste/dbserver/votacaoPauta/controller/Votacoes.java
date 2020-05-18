@@ -2,10 +2,12 @@ package br.com.teste.dbserver.votacaoPauta.controller;
 
 import br.com.teste.dbserver.votacaoPauta.dao.PautaDAO;
 import br.com.teste.dbserver.votacaoPauta.dao.VotacaoDAO;
+import br.com.teste.dbserver.votacaoPauta.dao.VotacaoStatusDAO;
 import br.com.teste.dbserver.votacaoPauta.error.ApiError;
 import br.com.teste.dbserver.votacaoPauta.error.ResourceNotFoundException;
 import br.com.teste.dbserver.votacaoPauta.model.Pauta;
 import br.com.teste.dbserver.votacaoPauta.model.Votacao;
+import br.com.teste.dbserver.votacaoPauta.model.VotacaoStatus;
 import br.com.teste.dbserver.votacaoPauta.success.ApiSuccess;
 import br.com.teste.dbserver.votacaoPauta.taskscheduler.TaskScheduler;
 import br.com.teste.dbserver.votacaoPauta.util.Util;
@@ -30,6 +32,9 @@ public class Votacoes {
 
     @Autowired
     VotacaoDAO votacaoDAO;
+    
+    @Autowired
+    VotacaoStatusDAO votacaoStatusDAO;
 
     @Autowired
     PautaDAO pautaDAO;
@@ -43,7 +48,7 @@ public class Votacoes {
         Votacao votacao = new Votacao();
         
         try {
-            Optional<Pauta> pauta = this.pautaDAO.findById(id);
+            Optional<Pauta> pauta = pautaDAO.findById(id);
             if (!pauta.isPresent())
                 throw new ResourceNotFoundException("Pauta " + id + " não encontrada!");
 
@@ -64,14 +69,14 @@ public class Votacoes {
         } catch(Exception e) {
             return new ResponseEntity<>(new ApiError(
                             HttpStatus.INTERNAL_SERVER_ERROR,
-                            "Não foi possível votar!", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+                            "Erro ao iniciar sessão de votação!", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
         String formattedDate = FORMAT_DATETIME_TO_STR(ADD_DATE_MINUTES(votacao.getStart_date(), minutes));
         return new ResponseEntity(
                 new ApiSuccess(
                         HttpStatus.CREATED,
-                        "Votação " + votacao.getId() + " iniciada com sucesso! Término em " + formattedDate), HttpStatus.CREATED);
+                        "Votação ID: " + votacao.getId() + " iniciada com sucesso! Término em " + formattedDate), HttpStatus.CREATED);
     }
     
     @RequestMapping(method = RequestMethod.GET, path = "/votacoes")
@@ -89,5 +94,37 @@ public class Votacoes {
             throw new ResourceNotFoundException("Votacao " + id + " não encontrada!");
     
         return votacao.get();
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, path = "/votacoes/{id}/status")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<VotacaoStatus> GET_VOTACAO_STATUS(@PathVariable long id) {
+        Optional<VotacaoStatus> votacaoStatus = votacaoStatusDAO.findByVotacaoId(id);
+        Votacao votacao = votacaoStatus.get().getVotacao();
+        
+        if (!votacaoStatus.isPresent())
+            throw new ResourceNotFoundException("A votação " + votacao.getId() + " ainda não terminou! Dados não contabilizaos.");
+    
+        StringBuilder mensagemStatus = new StringBuilder();
+        double porcentagemSim = (votacaoStatus.get().getQtdSim() * 100) / votacaoStatus.get().getQtdVotos();
+        double porcentagemNao = (votacaoStatus.get().getQtdNao() * 100) / votacaoStatus.get().getQtdVotos();
+        
+        if(votacaoStatus.get().getQtdSim() > votacaoStatus.get().getQtdNao())
+            mensagemStatus.append("A pauta ").append(votacao.getPauta().getId())
+                    .append(" foi aprovada! ").append(porcentagemSim)
+                    .append("% dos votos favoráveis.");
+        else if(votacaoStatus.get().getQtdSim() < votacaoStatus.get().getQtdNao())
+            mensagemStatus.append("A pauta ").append(votacao.getPauta().getId())
+                    .append(" foi reprovada! ").append(porcentagemNao)
+                    .append("% dos votos contrários.");
+        else
+            mensagemStatus.append("A pauta ").append(votacao.getPauta().getId())
+                    .append(" foi votada com empate nos votos, mas sem uma conclusão de aprovação! ")
+                    .append(porcentagemSim).append("% dos votos favoráveis e ")
+                    .append(porcentagemNao).append("% dos votos contrários.");
+        
+        votacaoStatus.get().setResultado(mensagemStatus.toString());
+        
+        return new ResponseEntity<>(votacaoStatus.get(), HttpStatus.OK);
     }
 }

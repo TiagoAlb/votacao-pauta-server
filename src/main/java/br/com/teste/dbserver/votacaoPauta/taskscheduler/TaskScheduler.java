@@ -35,7 +35,7 @@ public class TaskScheduler {
         public void run() {
             Optional<Votacao> votacao = votacaoDAO.findById(id);
             if (!votacao.isPresent())
-                throw new ResourceNotFoundException("Votação " + id + " não encontrada!");
+                throw new ResourceNotFoundException("Votação ID: " + id + " não encontrada!");
 
             votacao.get().setOpen(false);
             votacao.get().setEnd_date(new Date(System.currentTimeMillis()));

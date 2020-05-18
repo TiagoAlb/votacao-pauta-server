@@ -25,13 +25,13 @@ public class Associado implements Serializable {
    @NotNull(message = "O campo cnpjCpf não pode ser nulo!")
    @Size(max = 14, message = "O campo cnpjCpf deve possuir no máximo {max} digitos!")
    @NotEmpty(message = "O campo cnpjCpf não pode ser vazio!")
-   @Column(nullable = false, length = 14)
+   @Column(unique = true, nullable = false, length = 14)
    private String cnpjCpf;
    
    @NotNull(message = "O campo nome não pode ser nulo!")
    @Size(max = 50, message = "O campo nome deve possuir no máximo {max} digitos!")
    @NotEmpty(message = "O campo nome não pode ser vazio!")
-   @Column(unique = true, nullable = false, length = 50)
+   @Column(nullable = false, length = 50)
    private String nome;
    
    @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
