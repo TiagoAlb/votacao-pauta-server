@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VotacaoStatusDAO extends PagingAndSortingRepository<VotacaoStatus, Long> {
+    @Query("SELECT votacaoStatus "
+            + "FROM VotacaoStatus votacaoStatus JOIN votacaoStatus.votacao votacao "
+            + "WHERE votacao.id = :idVotacao")
+    public Optional<VotacaoStatus> findByVotacaoId(@Param("idVotacao") long idVotacao);
+    
     @Query("SELECT new br.com.teste.dbserver.votacaoPauta.model.VotacaoStatus("
             + "votacao, "
             + "SUM(CASE WHEN (voto.voto = true) THEN 1 ELSE 0 END) AS qtdSim, "
@@ -16,5 +21,5 @@ public interface VotacaoStatusDAO extends PagingAndSortingRepository<VotacaoStat
             + "COUNT(voto.voto) AS qtdVotos) "
             + "FROM Votacao votacao JOIN votacao.votos voto "
             + "WHERE votacao.id = :idVotacao")
-    public Optional<VotacaoStatus> findByVotacaoId(@Param("idVotacao") long idVotacao);
+    public Optional<VotacaoStatus> contabilizaVotos(@Param("idVotacao") long idVotacao);
 }

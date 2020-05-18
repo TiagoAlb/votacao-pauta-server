@@ -5,6 +5,7 @@ import br.com.teste.dbserver.votacaoPauta.error.ApiError;
 import br.com.teste.dbserver.votacaoPauta.error.ResourceNotFoundException;
 import br.com.teste.dbserver.votacaoPauta.model.Associado;
 import br.com.teste.dbserver.votacaoPauta.util.CpfCnpjUtils;
+import static br.com.teste.dbserver.votacaoPauta.util.Util.VALIDATE_MAIL;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,6 +41,13 @@ public class Associados {
             Optional<Associado> associadoAtual = associadoDAO.findByCnpjCpf(cnpjCpfLimpo);
             if(associadoAtual.isPresent())
                 throw new Exception("Este CNPJ ou CPF já está cadastrado!");
+            
+            if(!VALIDATE_MAIL(associado.getEmail()))
+                throw new Exception("Email inválido!");
+            
+            associadoAtual = associadoDAO.findByEmail(associado.getEmail());
+            if(associadoAtual.isPresent())
+                throw new Exception("Este email já está cadastrado!");
             
             associado.setId(0);
             associado.setCnpjCpf(cnpjCpfLimpo);

@@ -104,27 +104,7 @@ public class Votacoes {
         
         if (!votacaoStatus.isPresent())
             throw new ResourceNotFoundException("A votação " + votacao.getId() + " ainda não terminou! Dados não contabilizaos.");
-    
-        StringBuilder mensagemStatus = new StringBuilder();
-        double porcentagemSim = (votacaoStatus.get().getQtdSim() * 100) / votacaoStatus.get().getQtdVotos();
-        double porcentagemNao = (votacaoStatus.get().getQtdNao() * 100) / votacaoStatus.get().getQtdVotos();
-        
-        if(votacaoStatus.get().getQtdSim() > votacaoStatus.get().getQtdNao())
-            mensagemStatus.append("A pauta ").append(votacao.getPauta().getId())
-                    .append(" foi aprovada! ").append(porcentagemSim)
-                    .append("% dos votos favoráveis.");
-        else if(votacaoStatus.get().getQtdSim() < votacaoStatus.get().getQtdNao())
-            mensagemStatus.append("A pauta ").append(votacao.getPauta().getId())
-                    .append(" foi reprovada! ").append(porcentagemNao)
-                    .append("% dos votos contrários.");
-        else
-            mensagemStatus.append("A pauta ").append(votacao.getPauta().getId())
-                    .append(" foi votada com empate nos votos, mas sem uma conclusão de aprovação! ")
-                    .append(porcentagemSim).append("% dos votos favoráveis e ")
-                    .append(porcentagemNao).append("% dos votos contrários.");
-        
-        votacaoStatus.get().setResultado(mensagemStatus.toString());
-        
+
         return new ResponseEntity<>(votacaoStatus.get(), HttpStatus.OK);
     }
 }

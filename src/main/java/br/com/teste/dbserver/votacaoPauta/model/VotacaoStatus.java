@@ -35,7 +35,7 @@ public class VotacaoStatus implements Serializable {
     @Column(nullable = false)
     private long qtdVotos;
     
-    @Column(length = 50)
+    @Column(length = 500)
     private String resultado;
     
     public VotacaoStatus(Votacao votacao, long qtdSim, long qtdNao, long qtdVotos) {

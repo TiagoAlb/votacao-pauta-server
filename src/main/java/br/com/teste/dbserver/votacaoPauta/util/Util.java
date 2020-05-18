@@ -4,6 +4,8 @@ import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -36,4 +38,16 @@ public class Util {
        
        return value.equals("sim") || value.equals("nao");
    }
+   
+   public static boolean VALIDATE_MAIL(String email) {
+        if(email == null || email.isEmpty())
+            return false;
+        
+        String padraoDeEmail
+                = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        Pattern pattern = Pattern.compile(padraoDeEmail);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 }
