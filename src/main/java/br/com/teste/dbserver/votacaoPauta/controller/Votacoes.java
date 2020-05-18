@@ -91,7 +91,7 @@ public class Votacoes {
     public Votacao GET_VOTACAO(@PathVariable long id) {
         Optional<Votacao> votacao = votacaoDAO.findById(id);
         if (!votacao.isPresent())
-            throw new ResourceNotFoundException("Votacao " + id + " não encontrada!");
+            throw new ResourceNotFoundException("Votacão " + id + " não encontrada!");
     
         return votacao.get();
     }

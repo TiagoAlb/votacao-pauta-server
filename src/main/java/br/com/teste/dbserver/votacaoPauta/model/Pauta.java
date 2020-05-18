@@ -21,7 +21,7 @@ public class Pauta implements Serializable {
    private long id;
    
    @NotNull(message = "O campo titulo não pode ser nulo!")
-   @Size(max = 50, message = "O campo titulo deve possuir no máximo {max} caracteres!")
+   @Size(max = 100, message = "O campo titulo deve possuir no máximo {max} caracteres!")
    @NotEmpty(message = "O campo titulo não pode ser vazio!")
    @Column(nullable = false, length = 100)
    private String titulo;
