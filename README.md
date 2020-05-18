@@ -294,7 +294,7 @@ Não se preocupe! Todos os associados serão avisados da finalização da sessã
 ![alt text](https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/emailVotacaoStatus.PNG)
 
 ## Desenvolvimentos futuros
-A API de votação de pautas foi desenvolvida como teste de desenvolvimento, porém para desenvolvimentos futuros seriam interessantes para o projeto:
+A API de votação de pautas foi desenvolvida como teste de desenvolvimento, porém para realizações futuras seria interessante:
 - Criação de front-end para votação
 - Autenticação de usuários para impedir a votação de um usuário com as credenciais de outro
 - Camada de segurança, com o controle de requisições
