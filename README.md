@@ -7,7 +7,7 @@ Foi configurado o projeto em um servidor externo, para facilitar os testes da eq
 Link para testes de requisições a API: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta`
 
 ## Resumo
-A aplicação foi realizada na linguagem Java, utilizado o framework Spring Boot na versão 2.3.0 e o Maven para controle de dependências. Junto ao Spring, foi utilizado o framework Hibernate, para realizar o mapeamento das classes Java e conversão em tabelas no banco de dados. A API REST desenvolvida possui endpoints com métodos dos tipos GET e POST, para criação de busca de dados. Não foi necessária a utilização de métodos PUT devido a não atualização de nenhuma informação para o projeto.
+A aplicação foi realizada na linguagem Java, utilizado o framework Spring Boot na versão 2.3.0 e o Maven para controle de dependências. Junto ao Spring, foi utilizado o framework Hibernate, para realizar o mapeamento das classes Java e conversão em tabelas no banco de dados. A API REST desenvolvida possui endpoints com métodos dos tipos GET e POST, para criação e busca de dados. Não foi necessária a utilização de métodos PUT devido a não atualização de nenhuma informação para o projeto.
 
 ## Executar projeto
 No CMD, para o sistema operacional Windows, acesse o pacote .jar do projeto e execute o seguinte comando para rodar o código compilado:
@@ -17,6 +17,7 @@ No CMD, para o sistema operacional Windows, acesse o pacote .jar do projeto e ex
 O gerenciador de banco de dados escolhido para integrar a aplicação foi o MySQL, com as seguintes configurações:
 
 Usuário: root
+
 Senha: root
 
 ### Diagrama de banco de dados da aplicação
@@ -25,8 +26,11 @@ Senha: root
 ## Endpoints
 * Para testes, os métodos descritos na continuidade podem ser escritos completando o link inicial deste documento. 
 Ex:
+
 Link externo: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta`
-Método GET associados: /associados
+
+Método GET associados: `/associados`
+
 Endpoint completo: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/associados`
 
 Seguem abaixo os seguintes endpoints criados para o funcionamento da API:
