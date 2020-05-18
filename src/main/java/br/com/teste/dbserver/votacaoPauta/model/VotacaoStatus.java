@@ -38,6 +38,8 @@ public class VotacaoStatus implements Serializable {
     @Column(length = 500)
     private String resultado;
     
+    public VotacaoStatus() {}
+    
     public VotacaoStatus(Votacao votacao, long qtdSim, long qtdNao, long qtdVotos) {
         this.votacao = votacao;
         this.qtdSim = qtdSim;
