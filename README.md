@@ -268,6 +268,7 @@ Retorno:
 ```
 
 ### Votar em uma Sessão de Votação
+#### * Atenção! Para votar, verifique o ID da votação. Não necessariamente o ID da votação é o mesmo ID da pauta. Quando iniciada a sessão de votação, é retornado o seu ID, que deve ser utilizado para inclusão de novos votos e contagem posterior.
 ```
 POST:
 Endpoint: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/votacoes/1/associados/1/votos?voto=sim
