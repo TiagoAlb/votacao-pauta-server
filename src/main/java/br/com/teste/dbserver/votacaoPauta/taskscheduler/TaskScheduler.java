@@ -83,7 +83,6 @@ public class TaskScheduler {
                 VotacaoStatus votacaoStatusSaved = votacaoStatusDAO.save(votacaoStatus.get());
 
                 jmsTemplate.convertAndSend("queue.sample", votacaoStatusSaved);
-                
             } catch(ResourceNotFoundException e) {
                 e.printStackTrace();
             }
