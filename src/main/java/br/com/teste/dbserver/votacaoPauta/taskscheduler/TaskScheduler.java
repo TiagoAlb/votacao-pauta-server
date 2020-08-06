@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,11 +26,8 @@ public class TaskScheduler {
     @Autowired
     VotacaoStatusDAO votacaoStatusDAO;
     
-    @Autowired
-    AssociadoDAO associadoDAO;
-    
-    @Autowired
-    SendMail sendMail;
+    @Autowired 
+    JmsTemplate jmsTemplate;
 
     public void scheduleRunnable(long id, long minutes) {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
@@ -59,28 +57,33 @@ public class TaskScheduler {
                 Optional<VotacaoStatus> votacaoStatus = votacaoStatusDAO.contabilizaVotos(id);
 
                 StringBuilder mensagemStatus = new StringBuilder();
-                double porcentagemSim = (votacaoStatus.get().getQtdSim() * 100) / votacaoStatus.get().getQtdVotos();
-                double porcentagemNao = (votacaoStatus.get().getQtdNao() * 100) / votacaoStatus.get().getQtdVotos();
+                if(votacaoStatus.isPresent() && votacaoStatus.get().getQtdVotos() > 0) {
+                    double porcentagemSim = (votacaoStatus.get().getQtdSim() * 100) / votacaoStatus.get().getQtdVotos();
+                    double porcentagemNao = (votacaoStatus.get().getQtdNao() * 100) / votacaoStatus.get().getQtdVotos();
 
-                if(votacaoStatus.get().getQtdSim() > votacaoStatus.get().getQtdNao())
+                    if(votacaoStatus.get().getQtdSim() > votacaoStatus.get().getQtdNao())
+                        mensagemStatus.append("A pauta ID: ").append(votacao.get().getPauta().getId())
+                                .append(" foi aprovada! ").append(porcentagemSim)
+                                .append("% dos votos favoráveis.");
+                    else if(votacaoStatus.get().getQtdSim() < votacaoStatus.get().getQtdNao())
+                        mensagemStatus.append("A pauta ID: ").append(votacao.get().getPauta().getId())
+                                .append(" foi reprovada! ").append(porcentagemNao)
+                                .append("% dos votos contrários.");
+                    else
+                        mensagemStatus.append("A pauta ID: ").append(votacao.get().getPauta().getId())
+                                .append(" foi votada com empate nos votos, mas sem uma conclusão de aprovação! ")
+                                .append(porcentagemSim).append("% dos votos favoráveis e ")
+                                .append(porcentagemNao).append("% dos votos contrários.");
+                } else {
                     mensagemStatus.append("A pauta ID: ").append(votacao.get().getPauta().getId())
-                            .append(" foi aprovada! ").append(porcentagemSim)
-                            .append("% dos votos favoráveis.");
-                else if(votacaoStatus.get().getQtdSim() < votacaoStatus.get().getQtdNao())
-                    mensagemStatus.append("A pauta ID: ").append(votacao.get().getPauta().getId())
-                            .append(" foi reprovada! ").append(porcentagemNao)
-                            .append("% dos votos contrários.");
-                else
-                    mensagemStatus.append("A pauta ID: ").append(votacao.get().getPauta().getId())
-                            .append(" foi votada com empate nos votos, mas sem uma conclusão de aprovação! ")
-                            .append(porcentagemSim).append("% dos votos favoráveis e ")
-                            .append(porcentagemNao).append("% dos votos contrários.");
+                                .append(" não teve votos!");
+                }
 
                 votacaoStatus.get().setResultado(mensagemStatus.toString());        
                 VotacaoStatus votacaoStatusSaved = votacaoStatusDAO.save(votacaoStatus.get());
 
-                String[] mails = associadoDAO.findMailList();
-                sendMail.send(mails, votacaoStatusSaved);
+                jmsTemplate.convertAndSend("queue.sample", votacaoStatusSaved);
+                
             } catch(ResourceNotFoundException e) {
                 e.printStackTrace();
             }

@@ -19,7 +19,7 @@ public interface VotacaoStatusDAO extends PagingAndSortingRepository<VotacaoStat
             + "SUM(CASE WHEN (voto.voto = true) THEN 1 ELSE 0 END) AS qtdSim, "
             + "SUM(CASE WHEN (voto.voto = false) THEN 1 ELSE 0 END) AS qtdNao,"
             + "COUNT(voto.voto) AS qtdVotos) "
-            + "FROM Votacao votacao JOIN votacao.votos voto "
+            + "FROM Votacao votacao LEFT JOIN votacao.votos voto "
             + "WHERE votacao.id = :idVotacao")
     public Optional<VotacaoStatus> contabilizaVotos(@Param("idVotacao") long idVotacao);
 }
