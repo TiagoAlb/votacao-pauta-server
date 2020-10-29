@@ -7,6 +7,8 @@ Foi configurado o projeto em um servidor externo, para facilitar os testes da eq
 
 Link para testes de requisições a API: `http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api`
 
+Link para o sitema web: `http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:3000`
+
 ## Resumo
 A aplicação foi realizada na linguagem Java, utilizado o framework Spring Boot na versão 2.3.0 e o Maven para controle de dependências. Junto ao Spring, foi utilizado o framework Hibernate, para realizar o mapeamento das classes Java e conversão em tabelas no banco de dados. A API REST desenvolvida possui endpoints com métodos dos tipos GET e POST, para criação e busca de dados. Não foi necessária a utilização de métodos PUT devido a não atualização de nenhuma informação para o projeto.
 
@@ -385,6 +387,53 @@ Retorno:
   "create_date": "2020-05-18@08:20:05.778+0000"
 }
 ```
+
+## Cadastro de Usuário
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro.PNG" width="710" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro_mobile.jpeg" width="200" />
+</p>
+
+## Autenticação
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/login.PNG" width="690" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/login_mobile.jpeg" width="212" />
+</p>
+
+## Home
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/home.PNG" width="690" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/home_mobile.jpeg" width="212" />
+</p>
+
+## Pautas
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas.PNG" width="390" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_carregando_paginacao.png" width="390" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_mobile.jpeg" width="130" />
+</p>
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open.PNG" width="700" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open_mobile.jpeg" width="215" />
+</p>
+
+## Votações
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes.PNG" width="390" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes_em_votacao.PNG" width="390" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes_em_votacao_mobile.jpeg" width="130" />
+</p>
+
+## Cadastro de Pauta
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro.PNG" width="690" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro_mobile.jpeg" width="212" />
+</p>
+
+## Iniciar Votação
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/iniciar_votacao.PNG" width="800" />
+</p>
 
 ## Envio por email
 Não se preocupe! Todos os associados serão avisados da finalização da sessão de votação. O email utilizado para envio será o criado no cadastro do associado.
