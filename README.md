@@ -387,26 +387,30 @@ Retorno:
   "create_date": "2020-05-18@08:20:05.778+0000"
 }
 ```
-
-## Cadastro de Usuário
+## Páginas do Sistema
+### Cadastro de Usuário
+Página responsável por fazer o cadastro do Associado no sistema.
 <p float="center">
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro.PNG" width="710" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro_mobile.jpeg" width="200" />
 </p>
 
-## Autenticação
+### Autenticação
+Página responsável pela autenticação do Associado no sistema.
 <p float="center">
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/login.PNG" width="690" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/login_mobile.jpeg" width="212" />
 </p>
 
-## Home
+### Home
+Página de boas-vindas.
 <p float="center">
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/home.PNG" width="690" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/home_mobile.jpeg" width="212" />
 </p>
 
-## Pautas
+### Pautas
+Listagem e visualização das pautas cadastradas. Através desta é possível também ser direcionado para o cadastro de pauta ou iniciar uma votação de pauta.
 <p float="center">
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas.PNG" width="390" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_carregando_paginacao.png" width="390" />
@@ -417,34 +421,36 @@ Retorno:
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open_mobile.jpeg" width="215" />
 </p>
 
-## Votações
+### Cadastro de Pauta
+Página para cadastro de novas pautas.
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro.PNG" width="690" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro_mobile.jpeg" width="212" />
+</p>
+
+### Iniciar Votação
+A página de inicio de votação é responsável por iniciar uma sessão de votação, que possui tempo para aceitação de votos. Através dela deve-se definir a data e hora de conclusão da sessão, tendo como tempo mínimo 1 minuto.
+<p float="center">
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/iniciar_votacao.PNG" width="800" />
+</p>
+
+### Votações
+Listagem e visualização das votações já iniciadas. É possível identificar o status da votação (em andamento ou finalizada) e votar naquelas que estiverem ativas.
 <p float="center">
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes.PNG" width="390" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes_em_votacao.PNG" width="390" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes_em_votacao_mobile.jpeg" width="130" />
 </p>
 
-## Cadastro de Pauta
-<p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro.PNG" width="690" />
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro_mobile.jpeg" width="212" />
-</p>
-
-## Iniciar Votação
-<p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/iniciar_votacao.PNG" width="800" />
-</p>
-
-## Envio por email
+### Envio por email
 Não se preocupe! Todos os associados serão avisados da finalização da sessão de votação. O email utilizado para envio será o criado no cadastro do associado.
-
-### Exemplo de retorno por email
 ![alt text](https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/emailVotacaoStatus.PNG)
 
 ## Desenvolvimentos futuros
 A API de votação de pautas foi desenvolvida como teste de desenvolvimento, porém para realizações futuras seria interessante:
-- Criação de front-end para votação
-- Autenticação de usuários para impedir a votação de um usuário com as credenciais de outro
-- Camada de segurança, com o controle de requisições
 - Alteração de dados cadastrais de associados e pautas
+- Inclusão de foto de perfil do usuário
 - Melhora no escopo da mensagem enviada por email
+- Definir um escopo do que deveria ser permitido ao usuário admin e user
+- Criação de dashboard com resultados das últimas votações
+- Melhora no campo de cadastro de pautas, com a possibilidade de customização do texto e possível inclusão de imagens
