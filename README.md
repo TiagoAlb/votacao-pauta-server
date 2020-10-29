@@ -37,6 +37,10 @@ Endpoint completo: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:808
 
 Seguem abaixo os seguintes endpoints criados para o funcionamento da API:
 ### GET
+Autenticar usuário e receber token de acesso:  `/login`
+
+Validar token de acesso: `/validateLogin`
+
 Listar associados disponíveis para votação: `/associados`
 
 Buscar associado específico: `/associados/{id}`
@@ -73,6 +77,7 @@ Realizar voto em uma sessão de votação (O parâmetro voto é obrigatório e p
 ### Associado
 - Associado {id} não encontrado!
 - Erro ao incluir associado!
+- Unauthorized
 ### CNPJ/CPF
 - Este CNPJ ou CPF já está cadastrado!
 - Formato de CNPJ ou CPF inválido!
@@ -98,6 +103,7 @@ Realizar voto em uma sessão de votação (O parâmetro voto é obrigatório e p
 ### Pauta
 - Pauta {id} não encontrada!
 - Erro ao incluir pauta!
+- Unauthorized
 ### TITULO
 - O campo titulo não pode ser nulo!
 - O campo titulo deve possuir no máximo 100 caracteres!
@@ -116,6 +122,7 @@ Realizar voto em uma sessão de votação (O parâmetro voto é obrigatório e p
 - Erro ao iniciar sessão de votação!
 - A pauta {id} está em votação neste momento!
 - A pauta {id} já foi votada! Sessão encerrada.
+- Unauthorized
 ### MINUTO
 - O tempo mínimo para sessão de votação é de 1 minuto!
 
@@ -124,6 +131,7 @@ Realizar voto em uma sessão de votação (O parâmetro voto é obrigatório e p
 - Sessão de votação encerrada! Não é mais possível votar.
 - O associado {id} já realizou seu voto!
 - Não foi possível votar!
+- Unauthorized
 ### VOTO
 - Campo voto inválido!
 
@@ -134,10 +142,92 @@ Realizar voto em uma sessão de votação (O parâmetro voto é obrigatório e p
 - A pauta ID: {id} foi votada com empate nos votos, mas sem uma conclusão de aprovação! {porcentagemFavoravel} dos votos favoráveis e {porcentagemContraria} dos votos contrários.
 
 ## Exemplos de uso
+### Autenticar usuário
+```
+GET:
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/login
+
+Exemplo de usuário:
+Email: usuarioadmin@gmail.com
+Senha: admin
+
+Enviar no Header a Authorization no seguinte formato:
+Basic + usuario:senha (convertido em Base64)
+
+Ex: usuarioadmin@gmail.com:admin > dXN1YXJpb2FkbWluQGdtYWlsLmNvbTphZG1pbg==
+
+Para testes pode-se utilizar o seguinte site para conversão em Base64: https://www.4devs.com.br/codificar_decodificar_base64
+
+Header:
+{
+	"Authorization":"Basic dXN1YXJpb2FkbWluQGdtYWlsLmNvbTphZG1pbg=="
+}
+
+Retorno:
+
+Corpo:
+{
+  "id": 3,
+  "cnpjCpf": "04134740037",
+  "nome": "Usuário Admin",
+  "email": "usuarioadmin@gmail.com",
+  "creation_date": "2020-10-29@18:36:28.267+0000",
+  "permissions": [
+    "user",
+    "admin"
+  ]
+}
+
+Header:
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZXhwIjoxNjA0MDE4ODgxfQ.VqbVvzA1vtZ6iUwpV_G65VeHX4VO0zynqZMGHsRWH-E
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 29 Oct 2020 18:48:01 GMT
+```
+
+### Validar token de acesso
+```
+GET:
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/validateLogin
+
+Exemplo de usuário:
+Email: usuarioadmin@gmail.com
+Senha: admin
+
+Enviar no Header a Authorization no seguinte formato:
+Basic + token de acesso retornado no login
+
+Header:
+{
+	"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZXhwIjoxNjA0MDE4ODgxfQ.VqbVvzA1vtZ6iUwpV_G65VeHX4VO0zynqZMGHsRWH-E"
+}
+
+Retorno:
+
+Corpo:
+{
+  "id": 3,
+  "cnpjCpf": "04134740037",
+  "nome": "Usuário Admin",
+  "email": "usuarioadmin@gmail.com",
+  "creation_date": "2020-10-29@18:36:28.267+0000",
+  "permissions": [
+    "user",
+    "admin"
+  ]
+}
+```
+
 ### Listar Associados - Similar a outras listagens
 ```
 GET:
-Endpoint: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/associados
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/associados
 
 Retorno:
 {
@@ -181,7 +271,7 @@ Retorno:
 ### Buscar Pauta Específica - Similar a outras buscas específicas
 ```
 GET:
-Endpoint: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/pautas/1
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/pautas/1
 
 Retorno:
 {
@@ -195,7 +285,7 @@ Retorno:
 ### Buscar Status de Votação
 ```
 GET:
-Endpoint: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/votacoes/1/status
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/votacoes/1/status
 
 Retorno:
 {
@@ -223,7 +313,7 @@ Retorno:
 ### Cadastrar Associado
 ```
 POST:
-Endpoint: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/associados
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/associados
 
 Corpo:
 {
@@ -245,7 +335,7 @@ Retorno:
 ### Cadastrar Pauta
 ```
 POST:
-Endpoint: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/pautas
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/pautas
 
 Corpo:
 {
@@ -265,7 +355,7 @@ Retorno:
 ### Iniciar Sessão se Votação
 ```
 POST:
-Endpoint: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/pautas/1/votacao?minutes=1
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/pautas/1/votacao?minutes=1
 
 Retorno:
 {
@@ -279,7 +369,7 @@ Retorno:
 #### * Atenção! Para votar, verifique o ID da votação. Não necessariamente o ID da votação é o mesmo ID da pauta. Quando iniciada a sessão de votação, é retornado o seu ID, que deve ser utilizado para inclusão de novos votos e contagem posterior.
 ```
 POST:
-Endpoint: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/votacoes/1/associados/1/votos?voto=sim
+Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/votacoes/1/associados/1/votos?voto=sim
 
 Retorno:
 {
