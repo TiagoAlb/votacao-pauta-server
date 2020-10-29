@@ -447,7 +447,7 @@ Não se preocupe! Todos os associados serão avisados da finalização da sessã
 ![alt text](https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/emailVotacaoStatus.PNG)
 
 ## Desenvolvimentos futuros
-A API de votação de pautas foi desenvolvida como teste de desenvolvimento, porém para realizações futuras seria interessante:
+O sistema de votação de pautas foi criado como teste de desenvolvimento, porém para realizações futuras seria interessante:
 - Alteração de dados cadastrais de associados e pautas
 - Inclusão de foto de perfil do usuário
 - Melhora no escopo da mensagem enviada por email
