@@ -1,10 +1,11 @@
 # Votação Pauta
+Link do repositório front-end: https://github.com/Tiagoalbuquerque2302/votacao-pauta-client
 
 ## Servidor de aplicação
 Foi configurado o projeto em um servidor externo, para facilitar os testes da equipe. 
 * ATENÇÃO: Recomenda-se não realizar testes de desempenho no servidor externo, devido a baixa capacidade de processamento e a já utilização por outras aplicações.
 
-Link para testes de requisições a API: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta`
+Link para testes de requisições a API: `http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api`
 
 ## Resumo
 A aplicação foi realizada na linguagem Java, utilizado o framework Spring Boot na versão 2.3.0 e o Maven para controle de dependências. Junto ao Spring, foi utilizado o framework Hibernate, para realizar o mapeamento das classes Java e conversão em tabelas no banco de dados. A API REST desenvolvida possui endpoints com métodos dos tipos GET e POST, para criação e busca de dados. Não foi necessária a utilização de métodos PUT devido a não atualização de nenhuma informação para o projeto.
@@ -25,9 +26,10 @@ Senha: root
 
 ## Endpoints
 * Para testes, os métodos descritos na continuidade podem ser escritos completando o link inicial deste documento. 
+* É necessário realizar a autenticação do usuário para acesso a API. Apenas o cadastro de usuários é permitido sem autenticação.
 Ex:
 
-Link externo: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta`
+Link externo: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api`
 
 Método GET associados: `/associados`
 
@@ -89,6 +91,10 @@ Realizar voto em uma sessão de votação (O parâmetro voto é obrigatório e p
 - O campo nome deve possuir no máximo 100 caracteres!
 - O campo nome não pode ser vazio!
 
+### NEWPASSWORD
+- O campo senha não pode ser nulo!
+- O campo senha não pode ser vazio!
+
 ### Pauta
 - Pauta {id} não encontrada!
 - Erro ao incluir pauta!
@@ -101,6 +107,8 @@ Realizar voto em uma sessão de votação (O parâmetro voto é obrigatório e p
 - O campo descricao não pode ser nulo!
 - O campo descricao deve possuir no máximo 500 caracteres!
 - O campo descricao não pode ser vazio!
+
+### AUTOR (campo vinculado automáticamente com autenticação) - Não é necessário informar
 
 ### Votação
 - Votação {id} não encontrada!
