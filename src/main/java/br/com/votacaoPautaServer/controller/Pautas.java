@@ -45,7 +45,7 @@ public class Pautas {
     @RequestMapping(method = RequestMethod.GET, path = "/pautas")
     @ResponseStatus(HttpStatus.OK)
     public Iterable<Pauta> getPautas(@RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "10") int page_results) {
-        PageRequest pageRequest = PageRequest.of(page, page_results, Sort.unsorted());
+        PageRequest pageRequest = PageRequest.of(page, page_results, Sort.by("id").descending());
         return pautaDAO.findAll(pageRequest);
     }
 

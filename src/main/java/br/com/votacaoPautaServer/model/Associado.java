@@ -32,7 +32,6 @@ public class Associado implements Serializable {
     @Size(max = 14, message = "O campo cnpjCpf deve possuir no máximo {max} caracteres!")
     @NotEmpty(message = "O campo cnpjCpf não pode ser vazio!")
     @Column(unique = true, nullable = false, length = 14)
-    @JsonIgnore
     private String cnpjCpf;
 
     @NotNull(message = "O campo nome não pode ser nulo!")
