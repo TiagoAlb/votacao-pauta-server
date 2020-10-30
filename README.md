@@ -395,8 +395,8 @@ Retorno:
 ### Cadastro de Usuário
 Página responsável por fazer o cadastro do Associado no sistema.
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro.PNG" width="680" />
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro_mobile.jpeg" width="170" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro.PNG" width="660" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro_mobile.jpeg" width="182" />
 </p>
 
 ### Autenticação
@@ -421,7 +421,7 @@ Listagem e visualização das pautas cadastradas. Através desta é possível ta
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_mobile.jpeg" width="100" />
 </p>
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open.PNG" width="670" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open.PNG" width="660" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open_mobile.jpeg" width="185" />
 </p>
 
