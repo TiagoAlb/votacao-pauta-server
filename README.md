@@ -395,54 +395,52 @@ Retorno:
 ### Cadastro de Usuário
 Página responsável por fazer o cadastro do Associado no sistema.
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro.PNG" width="660" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro.PNG" width="640" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/cadastro_mobile.jpeg" width="182" />
 </p>
 
 ### Autenticação
 Página responsável pela autenticação do Associado no sistema.
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/login.PNG" width="660" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/login.PNG" width="640" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/login_mobile.jpeg" width="182" />
 </p>
 
 ### Home
 Página de boas-vindas.
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/home.PNG" width="660" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/home.PNG" width="640" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/home_mobile.jpeg" width="182" />
 </p>
 
 ### Pautas
 Listagem e visualização das pautas cadastradas. Através desta é possível também ser direcionado para o cadastro de pauta ou iniciar uma votação de pauta.
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas.PNG" width="360" />
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_carregando_paginacao.png" width="360" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas.PNG" width="350" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_carregando_paginacao.png" width="350" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_mobile.jpeg" width="100" />
 </p>
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open.PNG" width="660" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open.PNG" width="640" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_open_mobile.jpeg" width="185" />
 </p>
 
 ### Cadastro de Pauta
 Página para cadastro de novas pautas.
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro.PNG" width="660" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro.PNG" width="640" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/pautas_cadastro_mobile.jpeg" width="182" />
 </p>
 
 ### Iniciar Votação
 A página de inicio de votação é responsável por iniciar uma sessão de votação, que possui tempo para aceitação de votos. Através dela deve-se definir a data e hora de conclusão da sessão, tendo como tempo mínimo 1 minuto.
-<p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/iniciar_votacao.PNG" width="770" />
-</p>
+![alt text](https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/iniciar_votacao.PNG)
 
 ### Votações
 Listagem e visualização das votações já iniciadas. É possível identificar o status da votação (em andamento ou finalizada) e votar naquelas que estiverem ativas.
 <p float="center">
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes.PNG" width="360" />
-  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes_em_votacao.PNG" width="360" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes.PNG" width="350" />
+  <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes_em_votacao.PNG" width="350" />
   <img src="https://github.com/Tiagoalbuquerque2302/votacaoPauta/blob/master/src/main/resources/img/votacoes_em_votacao_mobile.jpeg" width="100" />
 </p>
 
