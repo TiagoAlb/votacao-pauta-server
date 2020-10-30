@@ -9,6 +9,10 @@ Link para testes de requisições a API: `http://ec2-177-71-228-249.sa-east-1.co
 
 Link para o sitema web: `http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:3000`
 
+### Usuário admin de login
+Email: usuarioadmin@gmail.com
+Senha: admin
+
 ## Resumo
 A aplicação foi realizada na linguagem Java, utilizado o framework Spring Boot na versão 2.3.0 e o Maven para controle de dependências. Junto ao Spring, foi utilizado o framework Hibernate, para realizar o mapeamento das classes Java e conversão em tabelas no banco de dados. A API REST desenvolvida possui endpoints com métodos dos tipos GET e POST, para criação e busca de dados. Não foi necessária a utilização de métodos PUT devido a não atualização de nenhuma informação para o projeto.
 
