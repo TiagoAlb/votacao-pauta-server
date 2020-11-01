@@ -1,5 +1,7 @@
 package br.com.votacaoPautaServer.controller;
 
+import br.com.votacaoPautaServer.auth.AssociadoAuth;
+import br.com.votacaoPautaServer.auth.ForbiddenException;
 import br.com.votacaoPautaServer.dao.PautaDAO;
 import br.com.votacaoPautaServer.dao.VotacaoDAO;
 import br.com.votacaoPautaServer.dao.VotacaoStatusDAO;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,10 +46,15 @@ public class Votacoes {
 
     @RequestMapping(method = RequestMethod.POST, value = "/pautas/{id}/votacao")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> postVotacao(@PathVariable long id, @RequestParam(required = false, defaultValue = "1") long minutes) {
+    public ResponseEntity<Object> postVotacao(@AuthenticationPrincipal AssociadoAuth associadoAuth, @PathVariable long id, @RequestParam(required = false, defaultValue = "1") long minutes) {
         Votacao votacao = new Votacao();
         
         try {
+            
+            if(!associadoAuth.getAssociado().getPermissions().contains("admin"))
+                throw new ForbiddenException("Apenas um administrador pode iniciar a sessão de votação!");
+            
+            
             Optional<Pauta> pauta = pautaDAO.findById(id);
             if (!pauta.isPresent())
                 throw new ResourceNotFoundException("Pauta " + id + " não encontrada!");
@@ -59,9 +67,9 @@ public class Votacoes {
                 else
                     throw new Exception("A pauta " + id + " já foi votada! Sessão encerrada.");
             }
-
+            pauta.get().setEmVotacao(true);
             votacao.setMinutes(minutes);
-            votacao.setPauta(pauta.get());
+            votacao.setPauta(pautaDAO.save(pauta.get()));
             votacao = votacaoDAO.save(votacao);
 
             taskScheduler.scheduleRunnable(votacao.getId(), minutes);
@@ -94,6 +102,18 @@ public class Votacoes {
             throw new ResourceNotFoundException("Votacão " + id + " não encontrada!");
     
         return votacao.get();
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, path = "/votacoes/{id}/associados/voto")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean getValidaAssociadoVoto(@AuthenticationPrincipal AssociadoAuth associadoAuth, @PathVariable long id) {
+        Optional<Votacao> votacao = votacaoDAO.findById(id);
+        if (!votacao.isPresent())
+            throw new ResourceNotFoundException("Votacão " + id + " não encontrada!");
+        
+        Optional<Long> idAssociadoVoto = votacaoDAO.findAssociadoIdVotacao(id, associadoAuth.getAssociado().getId());
+        
+        return idAssociadoVoto.isPresent();
     }
     
     @RequestMapping(method = RequestMethod.GET, path = "/votacoes/{id}/status")

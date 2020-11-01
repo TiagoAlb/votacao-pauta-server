@@ -40,6 +40,9 @@ public class Pauta implements Serializable {
    @ManyToOne
    @JoinColumn(nullable = false)
    private Associado autor;
+   
+   @Column(nullable = false)
+   private boolean emVotacao = false;
 
    public long getId() {
       return this.id;
@@ -79,5 +82,13 @@ public class Pauta implements Serializable {
 
     public void setAutor(Associado autor) {
         this.autor = autor;
+    }
+
+    public boolean isEmVotacao() {
+        return emVotacao;
+    }
+
+    public void setEmVotacao(boolean emVotacao) {
+        this.emVotacao = emVotacao;
     }
 }

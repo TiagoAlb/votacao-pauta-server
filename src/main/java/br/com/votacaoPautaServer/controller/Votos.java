@@ -5,6 +5,7 @@
  */
 package br.com.votacaoPautaServer.controller;
 
+import br.com.votacaoPautaServer.auth.AssociadoAuth;
 import br.com.votacaoPautaServer.dao.AssociadoDAO;
 import br.com.votacaoPautaServer.dao.VotacaoDAO;
 import br.com.votacaoPautaServer.dao.VotoDAO;
@@ -24,6 +25,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,30 +50,25 @@ public class Votos {
     @Autowired
     VotoDAO votoDAO;
     
-    @RequestMapping(method = RequestMethod.POST, value = "/votacoes/{idVotacao}/associados/{idAssociado}/votos")
-    public ResponseEntity<Object> postVoto(@PathVariable long idVotacao, @PathVariable long idAssociado, 
-            @RequestParam(required = true) String voto) {
-        
+    @RequestMapping(method = RequestMethod.POST, value = "/votacoes/{idVotacao}/votos")
+    public ResponseEntity<Object> postVoto(@AuthenticationPrincipal AssociadoAuth associadoAuth, @PathVariable long idVotacao, 
+            @RequestParam(required = true) String voto) {      
         Voto objetoVoto = new Voto();
-
+        Associado associado = associadoAuth.getAssociado();
         try {
             Optional<Votacao> votacao = votacaoDAO.findById(idVotacao);
             if (!votacao.isPresent())
                 throw new ResourceNotFoundException("Votacao " + idVotacao + " não encontrada!");
 
-            Optional<Associado> associado = associadoDAO.findById(idAssociado);
-            if (!associado.isPresent())
-                throw new ResourceNotFoundException("Associado " + idAssociado + " não encontrado!");
-
             if(!votacaoDAO.findVotacaoStatus(idVotacao))
                 throw new Exception("Sessão de votação encerrada! Não é mais possível votar.");
 
-            Optional<Long> idAssociadoVoto = votacaoDAO.findAssociadoIdVotacao(idVotacao, idAssociado);
+            Optional<Long> idAssociadoVoto = votacaoDAO.findAssociadoIdVotacao(idVotacao, associado.getId());
             if(idAssociadoVoto.isPresent())
-               throw new Exception("O associado " + associado.get().getNome() + " já realizou seu voto!");
+               throw new Exception("O associado " + associado.getNome() + " já realizou seu voto!");
                
             objetoVoto.setId(0);
-            objetoVoto.setAssociado(associado.get());
+            objetoVoto.setAssociado(associado);
             objetoVoto.setVoto(voto);
             objetoVoto = votoDAO.save(objetoVoto);
 
