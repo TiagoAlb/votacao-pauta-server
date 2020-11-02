@@ -2,11 +2,13 @@ package br.com.votacaoPautaServer.controller;
 
 import br.com.votacaoPautaServer.auth.AssociadoAuth;
 import br.com.votacaoPautaServer.auth.ForbiddenException;
+import br.com.votacaoPautaServer.dao.AssociadoDAO;
 import br.com.votacaoPautaServer.dao.PautaDAO;
 import br.com.votacaoPautaServer.dao.VotacaoDAO;
 import br.com.votacaoPautaServer.dao.VotacaoStatusDAO;
 import br.com.votacaoPautaServer.error.ApiError;
 import br.com.votacaoPautaServer.error.ResourceNotFoundException;
+import br.com.votacaoPautaServer.model.Associado;
 import br.com.votacaoPautaServer.model.Pauta;
 import br.com.votacaoPautaServer.model.Votacao;
 import br.com.votacaoPautaServer.model.VotacaoStatus;
@@ -37,6 +39,9 @@ public class Votacoes {
     
     @Autowired
     VotacaoStatusDAO votacaoStatusDAO;
+    
+    @Autowired
+    AssociadoDAO associadoDAO;
 
     @Autowired
     PautaDAO pautaDAO;
@@ -126,5 +131,12 @@ public class Votacoes {
             throw new ResourceNotFoundException("A votação " + votacao.getId() + " ainda não terminou! Dados não contabilizaos.");
 
         return new ResponseEntity<>(votacaoStatus.get(), HttpStatus.OK);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, path = "/votacoes/{id}/participantes")
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<Associado> getParticipantes(@PathVariable long id, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "10") int page_results) {
+        PageRequest pageRequest = PageRequest.of(page, page_results, Sort.unsorted());
+        return associadoDAO.findAll(pageRequest);
     }
 }
