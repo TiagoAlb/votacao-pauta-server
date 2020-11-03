@@ -9,7 +9,7 @@ Link para testes de requisições a API: `http://ec2-177-71-228-249.sa-east-1.co
 
 Link para o sitema web: `http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:3000`
 
-### Usuário admin de login
+### Usuário admin de login (usuário com permissão para iniciar sessão de votação)
 Email: usuarioadmin@gmail.com
 
 Senha: admin
@@ -359,7 +359,7 @@ Retorno:
 }
 ```
 
-### Iniciar Sessão se Votação
+### Iniciar Sessão se Votação - (Apenas usuário com permissão 'admin')
 ```
 POST:
 Endpoint: http://ec2-177-71-228-249.sa-east-1.compute.amazonaws.com:8082/api/pautas/1/votacao?minutes=1
