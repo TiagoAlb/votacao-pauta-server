@@ -50,7 +50,7 @@ Link externo: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api
 
 Método GET associados: `/associados`
 
-Endpoint completo: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/votacaoPauta/associados`
+Endpoint completo: `http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:8082/api/associados`
 
 Seguem abaixo os seguintes endpoints criados para o funcionamento da API:
 ### GET
