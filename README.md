@@ -17,6 +17,16 @@ Senha: admin
 ## Resumo
 A aplicação foi realizada na linguagem Java, utilizado o framework Spring Boot na versão 2.3.0 e o Maven para controle de dependências. Junto ao Spring, foi utilizado o framework Hibernate, para realizar o mapeamento das classes Java e conversão em tabelas no banco de dados. A API REST desenvolvida possui endpoints com métodos dos tipos GET e POST, para criação e busca de dados. Não foi necessária a utilização de métodos PUT devido a não atualização de nenhuma informação para o projeto.
 
+#### Resumo de passos para utilização
+1. Caso não deseje utilizar um usuário já cadastrado, crie um novo no caminho /register do sistema
+2. Com um usuário autenticado, crie uma nova pauta no caminho /pautas/nova, ou utilize o botão "Cadastrar Pauta" no caminho /pautas
+3. Agora que possuímos uma pauta, precisamos que um administrador inicie a sessao de votação. Ele será o "responsável" pela sessão. Para isto, entre no sistema com um usuário com permissão "admin".
+4. Já autenticado como administrador, entre na página de listagem das pautas em /pautas e expanda o card da pauta criada. Logo abaixo, será mostrado um botão para iniciar a sessão de votação desta pauta, clique nele.
+5. Na página de iniciar sessão de votação, selecione uma data e tempo futuro, que não seja menor do que 1 minuto de diferença entre a data e tempo atual. Clique em "Iniciar Sessão".
+6. Com a sessão de votação iniciada, todos os associados estão liberados para votar. Com qualquer usuário logado, entre em /sessoes e expanda o card da sessão. Neste carde será informado se você já votou e mostrará o botão "Entrar" para que você possa entrar na sessão. Clique nele.
+7. Na página da sessão de votação clique no botão que representa seu voto antes que o temporizador zere.
+8. Ao finalizar o tempo de votação, você e todos os outros associados receberão um email com os dados da pauta e o resultado da votação. Esse resultado também estará disponível na página da sessão de votação.
+
 ## Executar projeto
 No CMD, para o sistema operacional Windows, acesse o pacote .jar do projeto e execute o seguinte comando para rodar o código compilado:
 `java -jar votacaoPautaJar.jar`
