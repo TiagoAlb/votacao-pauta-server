@@ -23,7 +23,7 @@ A aplicação foi realizada na linguagem Java, utilizado o framework Spring Boot
 3. Agora que possuímos uma pauta, precisamos que um administrador inicie a sessao de votação. Ele será o "responsável" pela sessão. Para isto, entre no sistema com um usuário com permissão "admin".
 4. Já autenticado como administrador, entre na página de listagem das pautas em /pautas e expanda o card da pauta criada. Logo abaixo, será mostrado um botão para iniciar a sessão de votação desta pauta, clique nele.
 5. Na página de iniciar sessão de votação, selecione uma data e tempo futuro, que não seja menor do que 1 minuto de diferença entre a data e tempo atual. Clique em "Iniciar Sessão".
-6. Com a sessão de votação iniciada, todos os associados estão liberados para votar. Com qualquer usuário logado, entre em /sessoes e expanda o card da sessão. Neste carde será informado se você já votou e mostrará o botão "Entrar" para que você possa entrar na sessão. Clique nele.
+6. Com a sessão de votação iniciada, todos os associados estão liberados para votar. Com qualquer usuário logado, entre em /sessoes e expanda o card da sessão. Neste card será informado se você já votou e mostrará o botão "Entrar" para que você possa entrar na sessão. Clique nele.
 7. Na página da sessão de votação clique no botão que representa seu voto antes que o temporizador zere.
 8. Ao finalizar o tempo de votação, você e todos os outros associados receberão um email com os dados da pauta e o resultado da votação. Esse resultado também estará disponível na página da sessão de votação.
 
